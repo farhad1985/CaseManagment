@@ -7,19 +7,29 @@
 //
 
 import UIKit
+import CaseManagement
 
 class ViewController: UIViewController {
 
+    var caseItems: [CaseRequest] = []
+    let vc = AddCaseManagementVC.create()
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+
+        caseItems.append(CaseRequest(id: 1,
+                                     title: "Question",
+                                     partsCast: [CaseRequest(id: 0,
+                                                                 title: "Ask1"),
+                                                 CaseRequest(id: 1,
+                                                                 title: "Ask2")]))
+        
+        vc?.setDataSource(castRequests: caseItems)
+
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    @IBAction func aa(_ sender: Any) {
+        self.present(vc!, animated: true, completion: nil)
     }
-
-
 }
 

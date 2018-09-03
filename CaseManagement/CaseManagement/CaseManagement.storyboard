@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Add Case ManagementVC-->
+        <scene sceneID="GNh-tz-ZUd">
+            <objects>
+                <viewController storyboardIdentifier="AddCaseManagementVC" id="TXV-1V-0sY" customClass="AddCaseManagementVC" customModule="CaseManagement" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="2Gi-fg-fdw">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="16" translatesAutoresizingMaskIntoConstraints="NO" id="GuH-7n-BhC">
+                                <rect key="frame" x="32" y="36" width="311" height="96"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="f5g-4S-i1k" customClass="CasePickerView" customModule="CaseManagement" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="311" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="DZ6-fz-eGS"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="6Se-vL-nzg" customClass="CasePickerView" customModule="CaseManagement" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="56" width="311" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="jeO-TK-pBn"/>
+                                        </constraints>
+                                        <nil key="textColor"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <textInputTraits key="textInputTraits"/>
+                                    </textField>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.73333333329999995" green="0.1215686275" blue="0.13725490200000001" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstItem="GuH-7n-BhC" firstAttribute="leading" secondItem="Grq-HR-d7y" secondAttribute="leading" constant="32" id="6OD-z1-OMd"/>
+                            <constraint firstItem="GuH-7n-BhC" firstAttribute="top" secondItem="Grq-HR-d7y" secondAttribute="top" constant="16" id="dWp-w6-ECw"/>
+                            <constraint firstItem="Grq-HR-d7y" firstAttribute="trailing" secondItem="GuH-7n-BhC" secondAttribute="trailing" constant="32" id="mh1-dw-s7e"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Grq-HR-d7y"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="Tno-oY-eeX"/>
+                    <connections>
+                        <outlet property="caseTextField" destination="f5g-4S-i1k" id="2Rf-m7-7xO"/>
+                        <outlet property="partTextField" destination="6Se-vL-nzg" id="2gy-5D-Xwf"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="X4F-va-9LE" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1116" y="152.47376311844079"/>
+        </scene>
+    </scenes>
+</document>

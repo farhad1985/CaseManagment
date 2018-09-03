@@ -8,6 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		160157AA213CFD91007BAB5D /* CaseManagement.h in Headers */ = {isa = PBXBuildFile; fileRef = 160157A8213CFD91007BAB5D /* CaseManagement.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		160157EC213D10C8007BAB5D /* CaseManagement.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 160157EB213D10C8007BAB5D /* CaseManagement.storyboard */; };
+		160157EE213D1232007BAB5D /* TextFiledCM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157ED213D1232007BAB5D /* TextFiledCM.swift */; };
+		160157F0213D12EB007BAB5D /* AddCaseManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157EF213D12EB007BAB5D /* AddCaseManagementVC.swift */; };
+		160157F6213D2596007BAB5D /* CaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157F5213D2596007BAB5D /* CaseRequest.swift */; };
+		160157FB213D2783007BAB5D /* CasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157FA213D2783007BAB5D /* CasePickerView.swift */; };
+		160157FD213D2CE5007BAB5D /* CaseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157FC213D2CE5007BAB5D /* CaseTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -15,6 +21,12 @@
 		160157A8213CFD91007BAB5D /* CaseManagement.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CaseManagement.h; sourceTree = "<group>"; };
 		160157A9213CFD91007BAB5D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		160157B4213CFDD7007BAB5D /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		160157EB213D10C8007BAB5D /* CaseManagement.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CaseManagement.storyboard; sourceTree = "<group>"; };
+		160157ED213D1232007BAB5D /* TextFiledCM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFiledCM.swift; sourceTree = "<group>"; };
+		160157EF213D12EB007BAB5D /* AddCaseManagementVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCaseManagementVC.swift; sourceTree = "<group>"; };
+		160157F5213D2596007BAB5D /* CaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseRequest.swift; sourceTree = "<group>"; };
+		160157FA213D2783007BAB5D /* CasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasePickerView.swift; sourceTree = "<group>"; };
+		160157FC213D2CE5007BAB5D /* CaseTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,8 +69,38 @@
 			children = (
 				160157A8213CFD91007BAB5D /* CaseManagement.h */,
 				160157A9213CFD91007BAB5D /* Info.plist */,
+				160157EB213D10C8007BAB5D /* CaseManagement.storyboard */,
+				160157F9213D2626007BAB5D /* Model */,
+				160157FE213D2DBB007BAB5D /* View */,
+				160157FF213D2DC0007BAB5D /* Style */,
 			);
 			path = CaseManagement;
+			sourceTree = "<group>";
+		};
+		160157F9213D2626007BAB5D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				160157F5213D2596007BAB5D /* CaseRequest.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		160157FE213D2DBB007BAB5D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				160157ED213D1232007BAB5D /* TextFiledCM.swift */,
+				160157EF213D12EB007BAB5D /* AddCaseManagementVC.swift */,
+				160157FA213D2783007BAB5D /* CasePickerView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		160157FF213D2DC0007BAB5D /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				160157FC213D2CE5007BAB5D /* CaseTheme.swift */,
+			);
+			path = Style;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -122,6 +164,7 @@
 				TargetAttributes = {
 					160157A4213CFD91007BAB5D = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 					160157B3213CFDD7007BAB5D = {
 						CreatedOnToolsVersion = 9.4.1;
@@ -152,6 +195,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				160157EC213D10C8007BAB5D /* CaseManagement.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -169,6 +213,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				160157F6213D2596007BAB5D /* CaseRequest.swift in Sources */,
+				160157FB213D2783007BAB5D /* CasePickerView.swift in Sources */,
+				160157EE213D1232007BAB5D /* TextFiledCM.swift in Sources */,
+				160157F0213D12EB007BAB5D /* AddCaseManagementVC.swift in Sources */,
+				160157FD213D2CE5007BAB5D /* CaseTheme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -305,6 +354,7 @@
 		160157AE213CFD91007BAB5D /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
@@ -321,6 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.golrangsys.CaseManagement;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
 				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -329,6 +380,7 @@
 		160157AF213CFD91007BAB5D /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
