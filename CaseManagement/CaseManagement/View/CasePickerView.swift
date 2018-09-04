@@ -14,30 +14,49 @@ class CasePickerView: TextFiledCM {
     var dataSource: [CaseRequest] = []
     var selectCase: CaseRequest?
     
+    var defaultCase: CaseRequest? = nil {
+        didSet {
+            guard let _ = defaultCase, dataSource.count > 0 else {return}
+            let index = dataSource.index { (cr) -> Bool in
+                return cr.id == defaultCase?.id
+            } ?? 0
+            
+            if index >= 0 {
+                pickerView.selectRow(index, inComponent: 0, animated: true)
+//                if self.dataSource.count > 0 && index < dataSource.count {
+                    let caseSource = self.dataSource[index]
+                    text = caseSource.title
+                    onChange?(caseSource)
+//                }
+            }
+        }
+    }
     
     var onChange: ((CaseRequest) -> ())?
     
     
-    
     override func config() {
         super.config()
-        pickerView.frame = CGRect(x: 0, y: 0, width: 100, height: 200)
+        pickerView.frame = CGRect(x: 0, y: 0, width: 100, height: 220)
+        pickerView.backgroundColor = UIColor.white.withAlphaComponent(0.6)
         pickerView.delegate = self
         pickerView.dataSource = self
         self.inputView = pickerView
         setupToolBar()
     }
     
-    func setDataSource(dataSource: [CaseRequest] ) {
+    func setDataSource(dataSource: [CaseRequest], defaultCase: CaseRequest? = nil) {
         self.dataSource = dataSource
+        self.defaultCase = defaultCase ?? dataSource[0]
         pickerView.reloadAllComponents()
     }
-    
+
     private func setupToolBar() {
         
         let toolbar = UIToolbar(frame: CGRect(x: 0, y: 0, width: 100, height: 44))
+        toolbar.barTintColor = UIColor.white.withAlphaComponent(0.6)
         let buttonOK = UIBarButtonItem(title: "انتخاب", style: .done, target: self, action: #selector(selectItem))
-        
+
         buttonOK.setTitleTextAttributes([NSAttributedStringKey.font : CaseTheme.Font.font], for: .normal)
         buttonOK.setTitleTextAttributes([NSAttributedStringKey.font : CaseTheme.Font.font], for: .highlighted)
 
@@ -75,5 +94,6 @@ extension CasePickerView: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectCase = self.dataSource[row]
+        text = self.dataSource[row].title
     }
 }

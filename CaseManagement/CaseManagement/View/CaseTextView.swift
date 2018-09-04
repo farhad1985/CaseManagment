@@ -1,17 +1,17 @@
 //
-//  TextFiledCM.swift
+//  CaseTextView.swift
 //  CaseManagement
 //
-//  Created by Farhad Faramarzi on 9/3/18.
+//  Created by Farhad Faramarzi on 9/4/18.
 //  Copyright © 2018 Golrangsys. All rights reserved.
 //
 
 import UIKit
 
-class TextFiledCM: UITextField {
+class CaseTextView: UITextView {
 
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(frame: CGRect, textContainer: NSTextContainer?) {
+        super.init(frame: frame, textContainer: textContainer)
         
         config()
     }
@@ -26,11 +26,7 @@ class TextFiledCM: UITextField {
         self.font = CaseTheme.Font.font
         layer.borderColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1).cgColor
         layer.borderWidth  = 1
+        self.layer.cornerRadius = 7
         layer.masksToBounds = true
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        self.layer.cornerRadius = self.frame.height / 2
     }
 }

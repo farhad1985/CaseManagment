@@ -13,16 +13,38 @@ public class AddCaseManagementVC: UIViewController {
     @IBOutlet weak var caseTextField: CasePickerView!
     @IBOutlet weak var partTextField: CasePickerView!
     
+    var defaultCase: CaseRequest?
+    var defaultPartCase: CaseRequest?
+
     private var castRequests: [CaseRequest] = []
+    private var caseSelected: CaseRequest?
+    private var partCaseSelected: CaseRequest?
     
     public override func viewDidLoad() {
         super.viewDidLoad()
         
-        caseTextField.setDataSource(dataSource: castRequests)
-        
+        handleOnChanges()
+        setDefaultCases()
+    }
+    
+    private func handleOnChanges() {
         caseTextField.onChange = { caseRequest in
             self.partTextField.setDataSource(dataSource: caseRequest.partsCast)
+            self.caseSelected = caseRequest
             self.dismissKeyboard()
+        }
+        
+        partTextField.onChange = { partCaseRequest in
+            self.partCaseSelected = partCaseRequest
+            self.dismissKeyboard()
+        }
+    }
+    
+    private func setDefaultCases() {
+        if let dCase = defaultCase {
+            caseTextField.setDataSource(dataSource: castRequests, defaultCase: dCase)
+        } else {
+            caseTextField.setDataSource(dataSource: castRequests)
         }
     }
     
@@ -30,8 +52,9 @@ public class AddCaseManagementVC: UIViewController {
         self.view.endEditing(true)
     }
     
-    public func setDataSource(castRequests: [CaseRequest]) {
+    public func setDataSource(castRequests: [CaseRequest], defaultCase: CaseRequest? = nil) {
         self.castRequests = castRequests
+        self.defaultCase = defaultCase
     }
     
     public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

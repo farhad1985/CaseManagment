@@ -1,14 +1,14 @@
 //
-//  TextFiledCM.swift
+//  CaseButton.swift
 //  CaseManagement
 //
-//  Created by Farhad Faramarzi on 9/3/18.
+//  Created by Farhad Faramarzi on 9/4/18.
 //  Copyright © 2018 Golrangsys. All rights reserved.
 //
 
 import UIKit
 
-class TextFiledCM: UITextField {
+class CaseButton: UIButton {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -23,9 +23,7 @@ class TextFiledCM: UITextField {
     }
     
     func config(){
-        self.font = CaseTheme.Font.font
-        layer.borderColor = UIColor(red: 244/255, green: 244/255, blue: 244/255, alpha: 1).cgColor
-        layer.borderWidth  = 1
+        self.titleLabel?.font = CaseTheme.Font.font
         layer.masksToBounds = true
     }
     

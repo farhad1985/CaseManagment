@@ -18,12 +18,25 @@ class ViewController: UIViewController {
         super.viewDidLoad()
 
         caseItems.append(CaseRequest(id: 1,
-                                     title: "Question",
+                                     title: "Question1",
                                      partsCast: [CaseRequest(id: 0,
                                                                  title: "Ask1"),
                                                  CaseRequest(id: 1,
                                                                  title: "Ask2")]))
+        caseItems.append(CaseRequest(id: 2,
+                        title: "Question2",
+                        partsCast: [CaseRequest(id: 0,
+                                                title: "Ask3"),
+                                    CaseRequest(id: 1,
+                                                title: "Ask4")]))
         
+        caseItems.append(CaseRequest(id: 3,
+                                     title: "Question3",
+                                     partsCast: [CaseRequest(id: 0,
+                                                             title: "Ask5"),
+                                                 CaseRequest(id: 1,
+                                                             title: "Ask6")]))
+
         vc?.setDataSource(castRequests: caseItems)
 
     }

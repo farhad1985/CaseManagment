@@ -14,6 +14,10 @@
 		160157F6213D2596007BAB5D /* CaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157F5213D2596007BAB5D /* CaseRequest.swift */; };
 		160157FB213D2783007BAB5D /* CasePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157FA213D2783007BAB5D /* CasePickerView.swift */; };
 		160157FD213D2CE5007BAB5D /* CaseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 160157FC213D2CE5007BAB5D /* CaseTheme.swift */; };
+		1608F23C213E44EE00B63965 /* CaseTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F23B213E44EE00B63965 /* CaseTextView.swift */; };
+		1608F23E213E455D00B63965 /* CaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F23D213E455D00B63965 /* CaseView.swift */; };
+		1608F240213E471100B63965 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1608F23F213E471100B63965 /* Media.xcassets */; };
+		1608F242213E4E0500B63965 /* CaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F241213E4E0500B63965 /* CaseButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +31,10 @@
 		160157F5213D2596007BAB5D /* CaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseRequest.swift; sourceTree = "<group>"; };
 		160157FA213D2783007BAB5D /* CasePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CasePickerView.swift; sourceTree = "<group>"; };
 		160157FC213D2CE5007BAB5D /* CaseTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTheme.swift; sourceTree = "<group>"; };
+		1608F23B213E44EE00B63965 /* CaseTextView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseTextView.swift; sourceTree = "<group>"; };
+		1608F23D213E455D00B63965 /* CaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseView.swift; sourceTree = "<group>"; };
+		1608F23F213E471100B63965 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
+		1608F241213E4E0500B63965 /* CaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +81,7 @@
 				160157F9213D2626007BAB5D /* Model */,
 				160157FE213D2DBB007BAB5D /* View */,
 				160157FF213D2DC0007BAB5D /* Style */,
+				1608F23F213E471100B63965 /* Media.xcassets */,
 			);
 			path = CaseManagement;
 			sourceTree = "<group>";
@@ -91,6 +100,9 @@
 				160157ED213D1232007BAB5D /* TextFiledCM.swift */,
 				160157EF213D12EB007BAB5D /* AddCaseManagementVC.swift */,
 				160157FA213D2783007BAB5D /* CasePickerView.swift */,
+				1608F23B213E44EE00B63965 /* CaseTextView.swift */,
+				1608F23D213E455D00B63965 /* CaseView.swift */,
+				1608F241213E4E0500B63965 /* CaseButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -195,6 +207,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1608F240213E471100B63965 /* Media.xcassets in Resources */,
 				160157EC213D10C8007BAB5D /* CaseManagement.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -214,8 +227,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				160157F6213D2596007BAB5D /* CaseRequest.swift in Sources */,
+				1608F23C213E44EE00B63965 /* CaseTextView.swift in Sources */,
 				160157FB213D2783007BAB5D /* CasePickerView.swift in Sources */,
+				1608F242213E4E0500B63965 /* CaseButton.swift in Sources */,
 				160157EE213D1232007BAB5D /* TextFiledCM.swift in Sources */,
+				1608F23E213E455D00B63965 /* CaseView.swift in Sources */,
 				160157F0213D12EB007BAB5D /* AddCaseManagementVC.swift in Sources */,
 				160157FD213D2CE5007BAB5D /* CaseTheme.swift in Sources */,
 			);
