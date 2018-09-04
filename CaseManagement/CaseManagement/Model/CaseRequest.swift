@@ -13,6 +13,7 @@ public struct CaseRequest {
     var id: Int
     var title: String
     var partsCast: [CaseRequest] = []
+    var caseItems:  [Case] = []
     
     public init(id: Int, title: String, partsCast: [CaseRequest]) {
         self.id = id

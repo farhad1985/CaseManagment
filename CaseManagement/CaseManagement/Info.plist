@@ -20,5 +20,7 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPrincipalClass</key>
 	<string></string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>I need your mic</string>
 </dict>
 </plist>

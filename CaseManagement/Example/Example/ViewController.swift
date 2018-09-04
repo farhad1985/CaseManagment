@@ -13,7 +13,7 @@ class ViewController: UIViewController {
 
     var caseItems: [CaseRequest] = []
     let vc = AddCaseManagementVC.create()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -37,12 +37,15 @@ class ViewController: UIViewController {
                                                  CaseRequest(id: 1,
                                                              title: "Ask6")]))
 
-        vc?.setDataSource(castRequests: caseItems)
 
+        vc?.setDataSource(castRequests: caseItems)
+        
     }
 
     @IBAction func aa(_ sender: Any) {
-        self.present(vc!, animated: true, completion: nil)
+        let main = MainVC.initail(title: "Case management", caseList: caseItems)!
+        
+        self.show(main, sender: nil)
     }
 }
 
