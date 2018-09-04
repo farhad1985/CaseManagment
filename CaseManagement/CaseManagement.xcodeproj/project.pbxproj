@@ -18,6 +18,16 @@
 		1608F23E213E455D00B63965 /* CaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F23D213E455D00B63965 /* CaseView.swift */; };
 		1608F240213E471100B63965 /* Media.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1608F23F213E471100B63965 /* Media.xcassets */; };
 		1608F242213E4E0500B63965 /* CaseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F241213E4E0500B63965 /* CaseButton.swift */; };
+		F43F3CDA213E64660084974F /* CaseCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F43F3CD8213E62D00084974F /* CaseCell.xib */; };
+		F43F3CDB213E64690084974F /* CaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CD9213E62D00084974F /* CaseCell.swift */; };
+		F43F3CDD213E65060084974F /* Case.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CDC213E65060084974F /* Case.swift */; };
+		F43F3CE0213E69790084974F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CDF213E69790084974F /* Extensions.swift */; };
+		F43F3CE2213E69B90084974F /* CellTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CE1213E69B90084974F /* CellTheme.swift */; };
+		F43F3CE7213E7BB80084974F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CE6213E7BB80084974F /* MainVC.swift */; };
+		F43F3CEA213E7BDB0084974F /* CaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CE9213E7BDB0084974F /* CaseVC.swift */; };
+		F43F3CEC213E7D300084974F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CEB213E7D300084974F /* MainViewModel.swift */; };
+		F43F3CEE213E8CB30084974F /* FullImageVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CED213E8CB30084974F /* FullImageVc.swift */; };
+		F43F3CF0213EAC980084974F /* SegmentTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CEF213EAC980084974F /* SegmentTheme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,6 +45,16 @@
 		1608F23D213E455D00B63965 /* CaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseView.swift; sourceTree = "<group>"; };
 		1608F23F213E471100B63965 /* Media.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Media.xcassets; sourceTree = "<group>"; };
 		1608F241213E4E0500B63965 /* CaseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseButton.swift; sourceTree = "<group>"; };
+		F43F3CD8213E62D00084974F /* CaseCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CaseCell.xib; sourceTree = "<group>"; };
+		F43F3CD9213E62D00084974F /* CaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseCell.swift; sourceTree = "<group>"; };
+		F43F3CDC213E65060084974F /* Case.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Case.swift; sourceTree = "<group>"; };
+		F43F3CDF213E69790084974F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		F43F3CE1213E69B90084974F /* CellTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTheme.swift; sourceTree = "<group>"; };
+		F43F3CE6213E7BB80084974F /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		F43F3CE9213E7BDB0084974F /* CaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseVC.swift; sourceTree = "<group>"; };
+		F43F3CEB213E7D300084974F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		F43F3CED213E8CB30084974F /* FullImageVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageVc.swift; sourceTree = "<group>"; };
+		F43F3CEF213EAC980084974F /* SegmentTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTheme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,6 +95,8 @@
 		160157A7213CFD91007BAB5D /* CaseManagement */ = {
 			isa = PBXGroup;
 			children = (
+				F43F3CE3213E7B930084974F /* Scene */,
+				F43F3CDE213E69650084974F /* Extension */,
 				160157A8213CFD91007BAB5D /* CaseManagement.h */,
 				160157A9213CFD91007BAB5D /* Info.plist */,
 				160157EB213D10C8007BAB5D /* CaseManagement.storyboard */,
@@ -90,11 +112,31 @@
 			isa = PBXGroup;
 			children = (
 				160157F5213D2596007BAB5D /* CaseRequest.swift */,
+				F43F3CDC213E65060084974F /* Case.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
 		};
 		160157FE213D2DBB007BAB5D /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F43F3CD7213E61A80084974F /* Cell's */,
+				F43F3CD6213E61940084974F /* Component */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		160157FF213D2DC0007BAB5D /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				160157FC213D2CE5007BAB5D /* CaseTheme.swift */,
+				F43F3CE1213E69B90084974F /* CellTheme.swift */,
+				F43F3CEF213EAC980084974F /* SegmentTheme.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
+		F43F3CD6213E61940084974F /* Component */ = {
 			isa = PBXGroup;
 			children = (
 				160157ED213D1232007BAB5D /* TextFiledCM.swift */,
@@ -104,15 +146,51 @@
 				1608F23D213E455D00B63965 /* CaseView.swift */,
 				1608F241213E4E0500B63965 /* CaseButton.swift */,
 			);
-			path = View;
+			path = Component;
 			sourceTree = "<group>";
 		};
-		160157FF213D2DC0007BAB5D /* Style */ = {
+		F43F3CD7213E61A80084974F /* Cell's */ = {
 			isa = PBXGroup;
 			children = (
-				160157FC213D2CE5007BAB5D /* CaseTheme.swift */,
+				F43F3CD9213E62D00084974F /* CaseCell.swift */,
+				F43F3CD8213E62D00084974F /* CaseCell.xib */,
 			);
-			path = Style;
+			path = "Cell's";
+			sourceTree = "<group>";
+		};
+		F43F3CDE213E69650084974F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				F43F3CDF213E69790084974F /* Extensions.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		F43F3CE3213E7B930084974F /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				F43F3CE8213E7BBF0084974F /* Case View Controller */,
+				F43F3CE5213E7BA20084974F /* Main */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		F43F3CE5213E7BA20084974F /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				F43F3CED213E8CB30084974F /* FullImageVc.swift */,
+				F43F3CE6213E7BB80084974F /* MainVC.swift */,
+				F43F3CEB213E7D300084974F /* MainViewModel.swift */,
+			);
+			path = Main;
+			sourceTree = "<group>";
+		};
+		F43F3CE8213E7BBF0084974F /* Case View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F43F3CE9213E7BDB0084974F /* CaseVC.swift */,
+			);
+			path = "Case View Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -208,6 +286,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1608F240213E471100B63965 /* Media.xcassets in Resources */,
+				F43F3CDA213E64660084974F /* CaseCell.xib in Resources */,
 				160157EC213D10C8007BAB5D /* CaseManagement.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -227,13 +306,22 @@
 			buildActionMask = 2147483647;
 			files = (
 				160157F6213D2596007BAB5D /* CaseRequest.swift in Sources */,
+				F43F3CE2213E69B90084974F /* CellTheme.swift in Sources */,
 				1608F23C213E44EE00B63965 /* CaseTextView.swift in Sources */,
 				160157FB213D2783007BAB5D /* CasePickerView.swift in Sources */,
 				1608F242213E4E0500B63965 /* CaseButton.swift in Sources */,
+				F43F3CEC213E7D300084974F /* MainViewModel.swift in Sources */,
 				160157EE213D1232007BAB5D /* TextFiledCM.swift in Sources */,
+				F43F3CEA213E7BDB0084974F /* CaseVC.swift in Sources */,
 				1608F23E213E455D00B63965 /* CaseView.swift in Sources */,
 				160157F0213D12EB007BAB5D /* AddCaseManagementVC.swift in Sources */,
+				F43F3CDD213E65060084974F /* Case.swift in Sources */,
+				F43F3CEE213E8CB30084974F /* FullImageVc.swift in Sources */,
+				F43F3CDB213E64690084974F /* CaseCell.swift in Sources */,
+				F43F3CE0213E69790084974F /* Extensions.swift in Sources */,
 				160157FD213D2CE5007BAB5D /* CaseTheme.swift in Sources */,
+				F43F3CF0213EAC980084974F /* SegmentTheme.swift in Sources */,
+				F43F3CE7213E7BB80084974F /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

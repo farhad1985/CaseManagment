@@ -10,10 +10,10 @@ import UIKit
 
 public final class CaseTheme {
     
-    struct Font {
-        static var font: UIFont = UIFont.systemFont(ofSize: 15)
+    public struct Font {
+        public static var font: UIFont = UIFont.systemFont(ofSize: 15)
         
-        static func setFont(font: UIFont) {
+        public static func setFont(font: UIFont) {
             self.font = font
         }
     }
