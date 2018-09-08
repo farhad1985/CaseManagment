@@ -19,6 +19,7 @@
 		1608F246213E744400B63965 /* VoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F245213E744400B63965 /* VoiceView.swift */; };
 		1608F248213E746900B63965 /* Connectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F247213E746900B63965 /* Connectable.swift */; };
 		1608F24A213E9BCD00B63965 /* ExImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F249213E9BCD00B63965 /* ExImage.swift */; };
+		167301AD21437D820034CC85 /* CaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167301AC21437D820034CC85 /* CaseVC.swift */; };
 		167D8937213EB6BE005D498F /* CaseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D8936213EB6BE005D498F /* CaseTheme.swift */; };
 		167D8939213EB9AA005D498F /* AddCaseManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D8938213EB9AA005D498F /* AddCaseManagementVC.swift */; };
 		167D893B213EB9B3005D498F /* CaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D893A213EB9B3005D498F /* CaseView.swift */; };
@@ -28,7 +29,6 @@
 		F43F3CE0213E69790084974F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CDF213E69790084974F /* Extensions.swift */; };
 		F43F3CE2213E69B90084974F /* CellTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CE1213E69B90084974F /* CellTheme.swift */; };
 		F43F3CE7213E7BB80084974F /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CE6213E7BB80084974F /* MainVC.swift */; };
-		F43F3CEA213E7BDB0084974F /* CaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CE9213E7BDB0084974F /* CaseVC.swift */; };
 		F43F3CEC213E7D300084974F /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CEB213E7D300084974F /* MainViewModel.swift */; };
 		F43F3CEE213E8CB30084974F /* FullImageVc.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CED213E8CB30084974F /* FullImageVc.swift */; };
 		F43F3CF0213EAC980084974F /* SegmentTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = F43F3CEF213EAC980084974F /* SegmentTheme.swift */; };
@@ -50,6 +50,7 @@
 		1608F245213E744400B63965 /* VoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceView.swift; sourceTree = "<group>"; };
 		1608F247213E746900B63965 /* Connectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectable.swift; sourceTree = "<group>"; };
 		1608F249213E9BCD00B63965 /* ExImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExImage.swift; sourceTree = "<group>"; };
+		167301AC21437D820034CC85 /* CaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseVC.swift; sourceTree = "<group>"; };
 		167D8936213EB6BE005D498F /* CaseTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTheme.swift; sourceTree = "<group>"; };
 		167D8938213EB9AA005D498F /* AddCaseManagementVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCaseManagementVC.swift; sourceTree = "<group>"; };
 		167D893A213EB9B3005D498F /* CaseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseView.swift; sourceTree = "<group>"; };
@@ -59,7 +60,6 @@
 		F43F3CDF213E69790084974F /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F43F3CE1213E69B90084974F /* CellTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellTheme.swift; sourceTree = "<group>"; };
 		F43F3CE6213E7BB80084974F /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
-		F43F3CE9213E7BDB0084974F /* CaseVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaseVC.swift; sourceTree = "<group>"; };
 		F43F3CEB213E7D300084974F /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		F43F3CED213E8CB30084974F /* FullImageVc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullImageVc.swift; sourceTree = "<group>"; };
 		F43F3CEF213EAC980084974F /* SegmentTheme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentTheme.swift; sourceTree = "<group>"; };
@@ -105,12 +105,12 @@
 			children = (
 				F43F3CE3213E7B930084974F /* Scene */,
 				F43F3CDE213E69650084974F /* Extension */,
-				160157A8213CFD91007BAB5D /* CaseManagement.h */,
-				160157A9213CFD91007BAB5D /* Info.plist */,
-				160157EB213D10C8007BAB5D /* CaseManagement.storyboard */,
 				160157F9213D2626007BAB5D /* Model */,
 				160157FE213D2DBB007BAB5D /* View */,
 				160157FF213D2DC0007BAB5D /* Style */,
+				160157A8213CFD91007BAB5D /* CaseManagement.h */,
+				160157A9213CFD91007BAB5D /* Info.plist */,
+				160157EB213D10C8007BAB5D /* CaseManagement.storyboard */,
 				1608F23F213E471100B63965 /* Media.xcassets */,
 			);
 			path = CaseManagement;
@@ -144,11 +144,18 @@
 			path = Style;
 			sourceTree = "<group>";
 		};
+		167301AE214381750034CC85 /* Add Case */ = {
+			isa = PBXGroup;
+			children = (
+				167D8938213EB9AA005D498F /* AddCaseManagementVC.swift */,
+			);
+			path = "Add Case";
+			sourceTree = "<group>";
+		};
 		F43F3CD6213E61940084974F /* Component */ = {
 			isa = PBXGroup;
 			children = (
 				167D893A213EB9B3005D498F /* CaseView.swift */,
-				167D8938213EB9AA005D498F /* AddCaseManagementVC.swift */,
 				160157ED213D1232007BAB5D /* TextFiledCM.swift */,
 				160157FA213D2783007BAB5D /* CasePickerView.swift */,
 				1608F23B213E44EE00B63965 /* CaseTextView.swift */,
@@ -181,6 +188,7 @@
 		F43F3CE3213E7B930084974F /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				167301AE214381750034CC85 /* Add Case */,
 				F43F3CE8213E7BBF0084974F /* Case View Controller */,
 				F43F3CE5213E7BA20084974F /* Main */,
 			);
@@ -200,7 +208,7 @@
 		F43F3CE8213E7BBF0084974F /* Case View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				F43F3CE9213E7BDB0084974F /* CaseVC.swift */,
+				167301AC21437D820034CC85 /* CaseVC.swift */,
 			);
 			path = "Case View Controller";
 			sourceTree = "<group>";
@@ -326,10 +334,10 @@
 				F43F3CEC213E7D300084974F /* MainViewModel.swift in Sources */,
 				160157EE213D1232007BAB5D /* TextFiledCM.swift in Sources */,
 				1608F246213E744400B63965 /* VoiceView.swift in Sources */,
+				167301AD21437D820034CC85 /* CaseVC.swift in Sources */,
 				167D8939213EB9AA005D498F /* AddCaseManagementVC.swift in Sources */,
 				1608F248213E746900B63965 /* Connectable.swift in Sources */,
 				1608F24A213E9BCD00B63965 /* ExImage.swift in Sources */,
-				F43F3CEA213E7BDB0084974F /* CaseVC.swift in Sources */,
 				167D893B213EB9B3005D498F /* CaseView.swift in Sources */,
 				167D8937213EB6BE005D498F /* CaseTheme.swift in Sources */,
 				F43F3CDD213E65060084974F /* Case.swift in Sources */,
