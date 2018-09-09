@@ -11,10 +11,10 @@ import UIKit
 class CasePickerView: TextFiledCM {
     
     let pickerView = UIPickerView()
-    var dataSource: [CaseRequest] = []
-    var selectCase: CaseRequest?
+    var dataSource: [CaseItem] = []
+    var selectCase: CaseItem?
     
-    var defaultCase: CaseRequest? = nil {
+    var defaultCase: CaseItem? = nil {
         didSet {
             guard let _ = defaultCase, dataSource.count > 0 else {return}
             let index = dataSource.index { (cr) -> Bool in
@@ -32,7 +32,7 @@ class CasePickerView: TextFiledCM {
         }
     }
     
-    var onChange: ((CaseRequest) -> ())?
+    var onChange: ((CaseItem) -> ())?
     
     
     override func config() {
@@ -45,7 +45,7 @@ class CasePickerView: TextFiledCM {
         setupToolBar()
     }
     
-    func setDataSource(dataSource: [CaseRequest], defaultCase: CaseRequest? = nil) {
+    func setDataSource(dataSource: [CaseItem], defaultCase: CaseItem? = nil) {
         self.dataSource = dataSource
         self.defaultCase = defaultCase ?? dataSource[0]
         pickerView.reloadAllComponents()

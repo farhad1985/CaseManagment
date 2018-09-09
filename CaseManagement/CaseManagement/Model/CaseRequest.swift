@@ -8,14 +8,14 @@
 
 import Foundation
 
-public struct CaseRequest {
+public struct CaseItem {
     
     var id: Int
     var title: String
-    var partsCast: [CaseRequest] = []
+    var partsCast: [CaseItem] = []
     var caseItems:  [Case] = []
     
-    public init(id: Int, title: String, partsCast: [CaseRequest]) {
+    public init(id: Int, title: String, partsCast: [CaseItem]) {
         self.id = id
         self.title = title
         self.partsCast = partsCast

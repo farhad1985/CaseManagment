@@ -10,11 +10,12 @@ import UIKit
 
 class VoiceView: UIView, Connectable {
     
-    var isRecording: Bool = false
-    
     @IBOutlet weak var btnRecorder: CaseButton!
     
+    @IBOutlet weak var imgPause: UIImageView!
     @IBOutlet weak var imgGif: UIImageView!
+    
+    var onRecord: ((Bool) -> ())?
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,6 +32,8 @@ class VoiceView: UIView, Connectable {
     @IBAction func didTapRecord(_ sender: Any) {
         btnRecorder.isHidden = true
         imgGif.isHidden = false
+        imgPause.isHidden = false
+        onRecord?(true)
     }
     
     func setup() {
@@ -43,7 +46,8 @@ class VoiceView: UIView, Connectable {
     func stop() {
         btnRecorder.isHidden = false
         imgGif.isHidden = true
-
+        imgPause.isHidden = true
+        onRecord?(false)
     }
 
 }

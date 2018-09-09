@@ -19,6 +19,7 @@
 		1608F246213E744400B63965 /* VoiceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F245213E744400B63965 /* VoiceView.swift */; };
 		1608F248213E746900B63965 /* Connectable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F247213E746900B63965 /* Connectable.swift */; };
 		1608F24A213E9BCD00B63965 /* ExImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1608F249213E9BCD00B63965 /* ExImage.swift */; };
+		1626911821450F0700AA64F3 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1626911721450F0700AA64F3 /* Service.swift */; };
 		167301AD21437D820034CC85 /* CaseVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167301AC21437D820034CC85 /* CaseVC.swift */; };
 		167D8937213EB6BE005D498F /* CaseTheme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D8936213EB6BE005D498F /* CaseTheme.swift */; };
 		167D8939213EB9AA005D498F /* AddCaseManagementVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 167D8938213EB9AA005D498F /* AddCaseManagementVC.swift */; };
@@ -50,6 +51,7 @@
 		1608F245213E744400B63965 /* VoiceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoiceView.swift; sourceTree = "<group>"; };
 		1608F247213E746900B63965 /* Connectable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Connectable.swift; sourceTree = "<group>"; };
 		1608F249213E9BCD00B63965 /* ExImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExImage.swift; sourceTree = "<group>"; };
+		1626911721450F0700AA64F3 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		167301AC21437D820034CC85 /* CaseVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseVC.swift; sourceTree = "<group>"; };
 		167D8936213EB6BE005D498F /* CaseTheme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CaseTheme.swift; sourceTree = "<group>"; };
 		167D8938213EB9AA005D498F /* AddCaseManagementVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddCaseManagementVC.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				F43F3CDE213E69650084974F /* Extension */,
 				160157F9213D2626007BAB5D /* Model */,
 				160157FE213D2DBB007BAB5D /* View */,
+				1626911621450EF700AA64F3 /* Service */,
 				160157FF213D2DC0007BAB5D /* Style */,
 				160157A8213CFD91007BAB5D /* CaseManagement.h */,
 				160157A9213CFD91007BAB5D /* Info.plist */,
@@ -142,6 +145,14 @@
 				F43F3CEF213EAC980084974F /* SegmentTheme.swift */,
 			);
 			path = Style;
+			sourceTree = "<group>";
+		};
+		1626911621450EF700AA64F3 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				1626911721450F0700AA64F3 /* Service.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		167301AE214381750034CC85 /* Add Case */ = {
@@ -343,6 +354,7 @@
 				F43F3CDD213E65060084974F /* Case.swift in Sources */,
 				F43F3CEE213E8CB30084974F /* FullImageVc.swift in Sources */,
 				F43F3CDB213E64690084974F /* CaseCell.swift in Sources */,
+				1626911821450F0700AA64F3 /* Service.swift in Sources */,
 				F43F3CE0213E69790084974F /* Extensions.swift in Sources */,
 				F43F3CF0213EAC980084974F /* SegmentTheme.swift in Sources */,
 				F43F3CE7213E7BB80084974F /* MainVC.swift in Sources */,

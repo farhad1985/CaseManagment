@@ -29,28 +29,27 @@ public class MainVC: UIViewController {
         }
     }
     
-    var caseRequest : CaseRequest?
-    var caseList = [CaseRequest]()
+    var caseRequest : CaseItem?
+    var caseList = [CaseItem]()
     var titleHeader : String = ""
     var viewModel = MainViewModel()
     var defualtIndexSelected : Int?
     
+    var service: CaseManagementProtocol?
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        self.viewModel.list = caseList
+        
+        self.viewModel.list = service?.getCaseItems() ?? []
         self.viewModel.delegate = self
         self.generateSegment()
-        
-        
-        
     }
+    
     @IBAction func onAddClick(_ sender: Any) {
         let vc = AddCaseManagementVC.create()
-        let _case = self.caseList[self.viewModel.index]
+        let _case = viewModel.list[self.viewModel.index]
         vc?.setDataSource(castRequests: self.viewModel.list,defaultCase:_case)
         self.navigationController?.pushViewController(vc!, animated: true)
-        //self.present(vc!, animated: true, completion: nil)
     }
     
     func generateSegment(){
@@ -140,11 +139,11 @@ extension MainVC : CaseCellDelegate {
 
 extension MainVC : UITableViewDelegate , UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.caseList[self.viewModel.index].caseItems.count
+        return viewModel.list[self.viewModel.index].caseItems.count
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = self.caseList[self.viewModel.index].caseItems[indexPath.row]
+        let model = viewModel.list[self.viewModel.index].caseItems[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "CaseCell") as! CaseCell
         cell.configCell(caseItem: model, delegate: self)
         return UITableViewCell()
@@ -153,14 +152,14 @@ extension MainVC : UITableViewDelegate , UITableViewDataSource {
 
 
 public extension MainVC {
-    public static func initail(title : String , caseList : [CaseRequest] , defaultSelected : Int? = nil)->UINavigationController?{
+    public static func initail(title : String , service : CaseManagementProtocol?)->UINavigationController?{
         let bundel = Bundle(for: self)
         let story = UIStoryboard(name: "CaseManagement", bundle: bundel)
         let navigation = story.instantiateViewController(withIdentifier: "CaseNavigation") as? UINavigationController
         guard let main = navigation?.topViewController as? MainVC else {return nil}
-        main.caseList = caseList
+        main.service = service
         main.titleHeader = title
-        main.defualtIndexSelected = defaultSelected
+//        main.defualtIndexSelected = nil
         return navigation
     }
 }

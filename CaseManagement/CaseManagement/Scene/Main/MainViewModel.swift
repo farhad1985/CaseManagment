@@ -11,7 +11,7 @@ protocol MainViewModelDelegate {
     func changeIndex()
 }
 class MainViewModel {
-    var list : [CaseRequest] = []
+    var list : [CaseItem] = []
     var delegate : MainViewModelDelegate!
     var index  = 0 {
         didSet{
