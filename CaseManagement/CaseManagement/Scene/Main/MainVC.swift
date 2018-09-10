@@ -15,17 +15,23 @@ public class MainVC: UIViewController {
         didSet{
             tableView.delegate = self
             tableView.dataSource = self
-            let bundel = Bundle(for: MainVC.self)
-            let nib = UINib(nibName: "CaseCell", bundle: bundel)
-            tableView.register(nib, forCellReuseIdentifier: "CaseCell")
+            tableView.addSubview(pullToRefresh)
+            pullToRefresh.addTarget(self,
+                                    action: #selector(refresh),
+                                    for: .valueChanged)
         }
     }
+    
+    let pullToRefresh = UIRefreshControl()
     
     @IBOutlet weak var segment : UISegmentedControl!{
         didSet{
             segment.tintColor = CaseTheme.Segment.segmentTintColor
             segment.setTitleTextAttributes([NSAttributedStringKey.font: CaseTheme.Segment.font],
                                                     for: .normal)
+            segment.addTarget(self,
+                              action: #selector(actionSegment),
+                              for: .valueChanged)
         }
     }
     
@@ -40,25 +46,63 @@ public class MainVC: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        self.viewModel.list = service?.getCaseItems() ?? []
-        self.viewModel.delegate = self
-        self.generateSegment()
+        service?.register(table: self.tableView)
+        
+        service?.getCaseItems(callBack: { (items) in
+            self.viewModel.list = items
+            self.viewModel.delegate = self
+            self.generateSegment()
+            self.segment.selectedSegmentIndex = 0
+            self.getIssues()
+        })
+        
+    }
+    
+    @objc
+    func refresh() {
+        getIssues()
+    }
+    
+    func getIssues() {
+        self.viewModel.issueList.removeAll()
+        for _ in self.viewModel.list {
+            self.viewModel.issueList.append([])
+        }
+        service?.getCases(callBack: { (caseIssueList) in
+            for issue in caseIssueList {
+                for item in self.viewModel.list.enumerated() {
+                    if issue.issueCaseTypeCode == item.element.id {
+                        self.viewModel.issueList[item.offset].append(issue)
+                    }
+                }
+            }
+            print(self.viewModel.issueList)
+            self.tableView.reloadData()
+            self.pullToRefresh.endRefreshing()
+        })
+    }
+    
+    @objc
+    func actionSegment() {
+        print(segment.selectedSegmentIndex)
     }
     
     @IBAction func onAddClick(_ sender: Any) {
         let vc = AddCaseManagementVC.create()
-        let _case = viewModel.list[self.viewModel.index]
-        vc?.setDataSource(castRequests: self.viewModel.list,defaultCase:_case)
+        let _case = viewModel.issueList[self.viewModel.index]
+        vc?.setDataSource(castRequests: self.viewModel.list)
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
     func generateSegment(){
         segment.removeAllSegments()
         for (index,value) in viewModel.list.enumerated() {
-            segment.insertSegment(withTitle: value.title, at: index, animated: true)
+            segment.insertSegment(withTitle: value.title,
+                                  at: index,
+                                  animated: true)
         }
         if let selectedDefault = self.defualtIndexSelected {
-            //segment.selectedSegmentIndex = selectedDefault
+            segment.selectedSegmentIndex = selectedDefault
             self.viewModel.index = selectedDefault
         }
     }
@@ -74,79 +118,84 @@ extension MainVC : MainViewModelDelegate {
         self.tableView.reloadData()
     }
 }
-extension MainVC : CaseCellDelegate {
-    func showImage(_ cell: CaseCell) {
-        guard let indexPath = self.tableView.indexPath(for: cell) else{return}
-        let caseItem = self.viewModel.list[self.viewModel.index].caseItems[indexPath.row]
-        guard let imageFile = caseItem.getImageFile(),let url = imageFile.url, let type = imageFile.type else {
-            return
-        }
+
+//extension MainVC : CaseCellDelegate {
+//    func showImage(_ cell: CaseCell) {
+//        guard let indexPath = self.tableView.indexPath(for: cell) else{return}
+//        let caseItem = self.viewModel.list[self.viewModel.index].caseItems[indexPath.row]
+//        guard let imageFile = caseItem.getImageFile(),let url = imageFile.url, let type = imageFile.type else {
+//            return
+//        }
+//        
+//            if let url = URL(string: url)
+//            {
+//                cell.indicatorImage.startAnimating()
+//                cell.indicatorImage.isHidden = false
+//                //cell..isHidden = false
+//                self.viewModel.downloadImage(url, type: type) { (data) in
+//                    cell.indicatorImage.stopAnimating()
+//                    //cell.lblImageProgress.isHidden = true
+//                    guard let validData = data else {return}
+//                    self.showImage(UIImage(data: validData) ?? UIImage())
+//                }
+//            }
+//    }
+
+//    func playSound(_ cell: CaseCell) {
+//        guard let indexPath = self.tableView.indexPath(for: cell) else {return}
+//        let caseItem = self.viewModel.list[self.viewModel.index].caseItems[indexPath.row]
+//        guard let audioFile = caseItem.getAudioFile(),let url = audioFile.url, let type = audioFile.type else {return}
+//
+//        if let url = URL(string: url)
+//        {
+//            cell.indicatorAudio.startAnimating()
+//            cell.indicatorAudio.isHidden = false
+//            cell.lblAudioProgress.isHidden = false
+//            self.viewModel.downloadFile(url: url, type: type, completionHandler: { (path) in
+//                cell.indicatorAudio.stopAnimating()
+//                cell.lblAudioProgress.isHidden = true
+//                guard let _vPath = path else {return}
+//                self.soundPlay(withPath: _vPath)
+//            })
+//        }
         
-            if let url = URL(string: url)
-            {
-                cell.indicatorImage.startAnimating()
-                cell.indicatorImage.isHidden = false
-                //cell..isHidden = false
-                self.viewModel.downloadImage(url, type: type) { (data) in
-                    cell.indicatorImage.stopAnimating()
-                    //cell.lblImageProgress.isHidden = true
-                    guard let validData = data else {return}
-                    self.showImage(UIImage(data: validData) ?? UIImage())
-                }
-            }
-    }
-    
-    func playSound(_ cell: CaseCell) {
-        guard let indexPath = self.tableView.indexPath(for: cell) else {return}
-        let caseItem = self.viewModel.list[self.viewModel.index].caseItems[indexPath.row]
-        guard let audioFile = caseItem.getAudioFile(),let url = audioFile.url, let type = audioFile.type else {return}
         
-        if let url = URL(string: url)
-        {
-            cell.indicatorAudio.startAnimating()
-            cell.indicatorAudio.isHidden = false
-            cell.lblAudioProgress.isHidden = false
-            self.viewModel.downloadFile(url: url, type: type, completionHandler: { (path) in
-                cell.indicatorAudio.stopAnimating()
-                cell.lblAudioProgress.isHidden = true
-                guard let _vPath = path else {return}
-                self.soundPlay(withPath: _vPath)
-            })
-        }
-        
-        
-    }
-    
-    func soundPlay(withPath url: String)
-    {
-        let url = URL(fileURLWithPath: url)
-        let playerViewController = AVPlayerViewController()
-        playerViewController.player = AVPlayer(url: url)
-        self.present(playerViewController, animated: true, completion: nil)
-        
-    }
-    
-    func showImage(_ image: UIImage )
-    {
-        let vc = FullImageVc.newInstance()
-        vc.path = image
-        vc.title = self.title
-        self.present(vc, animated: true, completion: nil)
-        
-    }
-}
+//    }
+
+//    func soundPlay(withPath url: String)
+//    {
+//        let url = URL(fileURLWithPath: url)
+//        let playerViewController = AVPlayerViewController()
+//        playerViewController.player = AVPlayer(url: url)
+//        self.present(playerViewController, animated: true, completion: nil)
+//
+//    }
+//
+//    func showImage(_ image: UIImage )
+//    {
+//        let vc = FullImageVc.newInstance()
+//        vc.path = image
+//        vc.title = self.title
+//        self.present(vc, animated: true, completion: nil)
+//
+//    }
+//}
 
 
 extension MainVC : UITableViewDelegate , UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.list[self.viewModel.index].caseItems.count
+        if viewModel.list.count > 0 {
+            return viewModel.issueList[segment.selectedSegmentIndex].count
+        }
+        return 0
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let model = viewModel.list[self.viewModel.index].caseItems[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "CaseCell") as! CaseCell
-        cell.configCell(caseItem: model, delegate: self)
-        return UITableViewCell()
+        let model = viewModel.issueList[segment.selectedSegmentIndex][indexPath.row]
+        let cell = service?.getIssueCell(table: tableView,
+                                         index: indexPath,
+                                         item: model)
+        return cell!
     }
 }
 

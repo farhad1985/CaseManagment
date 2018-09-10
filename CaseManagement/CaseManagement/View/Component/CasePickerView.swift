@@ -47,7 +47,7 @@ class CasePickerView: TextFiledCM {
     
     func setDataSource(dataSource: [CaseItem], defaultCase: CaseItem? = nil) {
         self.dataSource = dataSource
-        self.defaultCase = defaultCase ?? dataSource[0]
+//        self.defaultCase = defaultCase ?? dataSource[0]
         pickerView.reloadAllComponents()
     }
 

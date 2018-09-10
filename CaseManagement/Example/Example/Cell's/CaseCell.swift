@@ -7,20 +7,20 @@
 //
 
 import UIKit
+import CaseManagement
 
-
-protocol CaseCellDelegate
-{
+protocol CaseCellDelegate {
     func showImage(_ cell : CaseCell);
     func playSound(_ cell : CaseCell);
 
 }
 
-final class CaseCell: UITableViewCell
-{
+class CaseCell: UITableViewCell {
+    
+    @IBOutlet weak var vwCaseContainer: UIView!
     @IBOutlet weak var vwStatus: UIView!
     @IBOutlet weak var lblDate: UILabel!
-     @IBOutlet weak var lblCaptionStatus: UILabel!
+    @IBOutlet weak var lblCaptionStatus: UILabel!
     @IBOutlet weak var lblTracking: UILabel!
     @IBOutlet weak var lblState: UILabel!
     @IBOutlet weak var lblSubject: UILabel!
@@ -35,69 +35,66 @@ final class CaseCell: UITableViewCell
     @IBOutlet weak var vwAudio: UIView!
     @IBOutlet weak var vwImage: UIView!
     @IBOutlet weak var vwAnswer: UIView!
-    var delegate : CaseCellDelegate!
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
-    }
+    var delegate : CaseCellDelegate?
 
-
-
-    @IBAction func play(_ sender: Any)
-    {
-        self.delegate.playSound(self)
+    @IBAction func play(_ sender: Any) {
+        self.delegate?.playSound(self)
     }
 
     @IBAction func showImage(_ sender: UIButton)
     {
-        self.delegate.showImage(self)
+        self.delegate?.showImage(self)
     }
 
-    func configCell(caseItem : Case,delegate :CaseCellDelegate)
-    {
+    func configCell(caseIssue : CaseIssue, delegate :CaseCellDelegate? = nil) {
         self.delegate = delegate
-        self.lblState.text = caseItem.statusName
-        self.lblDate.text = caseItem.requestDateTime
-        self.lblTitle.text = caseItem.description ?? ""
-        self.lblResponse.text = caseItem.response ?? ""
-        self.lblTracking.text = caseItem.trackingCode
-        self.lblSubject.text = caseItem.requestCategoryName
-        self.vwAnswer.isHidden = (caseItem.response == nil || (caseItem.response?.isEmpty)!) ? true : false
-        self.vwAnswer.isHidden = (caseItem.response == nil || (caseItem.response?.isEmpty)!) ? true : false
-        self.vwAudio.isHidden = caseItem.getAudioFile() == nil ? true : false
-        self.vwImage.isHidden = caseItem.getImageFile() == nil ? true : false
+        self.lblState.text = caseIssue.issueStatusName
+        self.lblDate.text = caseIssue.issueDate ?? ""
+        self.lblTitle.text = caseIssue.issueDescription ?? ""
+        self.lblResponse.text = caseIssue.issueReply ?? ""
+        self.lblTracking.text = caseIssue.issueCode
+        self.lblSubject.text = caseIssue.issueCaseTypeName
         
-        setStateTheme(case: caseItem)
+        vwCaseContainer.layer.cornerRadius = 7
+        vwCaseContainer.layer.masksToBounds = true
+        vwCaseContainer.layer.borderColor = UIColor.lightGray.cgColor
+        vwCaseContainer.layer.borderWidth = 1
+
+//        self.vwAnswer.isHidden = (caseIssue.response == nil || (caseIssue.response?.isEmpty)!) ? true : false
+//        self.vwAnswer.isHidden = (caseIssue.response == nil || (caseIssue.response?.isEmpty)!) ? true : false
+//        self.vwAudio.isHidden = caseIssue.getAudioFile() == nil ? true : false
+//        self.vwImage.isHidden = caseIssue.getImageFile() == nil ? true : false
+        
+//        setStateTheme(case: caseItem)
     }
     
-    func setStateTheme(case caseItem: Case){
-        switch caseItem.statusCode {
-        case 1:
-            let color = CaseTheme.Cell.Color.successState
-            self.vwStatus.addBorder(color: color, thickness: 1)
-            self.lblCaptionStatus.textColor = color
-            self.lblState.textColor = color
-            self.lblTracking.textColor = color
-            self.lblResponseDate.isHidden = true
-        case 6:
-            let color = CaseTheme.Cell.Color.wrongState
-            self.vwStatus.addBorder(color: color, thickness: 1)
-            self.lblCaptionStatus.textColor = color
-            self.lblState.textColor = color
-            self.lblTracking.textColor = color
-            self.lblResponseDate.isHidden = true
-        case 5:
-            let color = CaseTheme.Cell.Color.progressState
-            self.vwStatus.addBorder(color: color, thickness: 1)
-            self.lblState.textColor = color
-            self.lblCaptionStatus.textColor = color
-            self.lblTracking.textColor = color
-            self.lblResponseDate.text =  (caseItem.responseDate)
-            self.lblResponseDate.isHidden = false
-        default : break
-        }
-    }
+//    func setStateTheme(case caseItem: Case){
+//        switch caseItem.statusCode {
+//        case 1:
+//            let color = CaseTheme.Cell.Color.successState
+//            self.vwStatus.addBorder(color: color, thickness: 1)
+//            self.lblCaptionStatus.textColor = color
+//            self.lblState.textColor = color
+//            self.lblTracking.textColor = color
+//            self.lblResponseDate.isHidden = true
+//        case 6:
+//            let color = CaseTheme.Cell.Color.wrongState
+//            self.vwStatus.addBorder(color: color, thickness: 1)
+//            self.lblCaptionStatus.textColor = color
+//            self.lblState.textColor = color
+//            self.lblTracking.textColor = color
+//            self.lblResponseDate.isHidden = true
+//        case 5:
+//            let color = CaseTheme.Cell.Color.progressState
+//            self.vwStatus.addBorder(color: color, thickness: 1)
+//            self.lblState.textColor = color
+//            self.lblCaptionStatus.textColor = color
+//            self.lblTracking.textColor = color
+//            self.lblResponseDate.text =  (caseItem.responseDate)
+//            self.lblResponseDate.isHidden = false
+//        default : break
+//        }
+//    }
     /*
     self.delegate = delegate
     self.lblStatus.text = caseItem.statusName

@@ -45,7 +45,6 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
     private var imageFilePath : String! = ""
     private var imageUploaded : String? = nil
     
-    
     var filename = "audioFile.m4a"
     
     public override func viewDidLoad() {
@@ -90,7 +89,8 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
     
     private func setDefaultCases() {
         if let dCase = defaultCase {
-            caseTextField.setDataSource(dataSource: castRequests, defaultCase: dCase)
+            caseTextField.setDataSource(dataSource: castRequests,
+                                        defaultCase: dCase)
         } else {
             caseTextField.setDataSource(dataSource: castRequests)
         }
@@ -100,19 +100,27 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
         self.view.endEditing(true)
     }
     
-    public func setDataSource(castRequests: [CaseItem], defaultCase: CaseItem? = nil) {
+    public func setDataSource(castRequests: [CaseItem],
+                              defaultCase: CaseItem? = nil) {
         self.castRequests = castRequests
         self.defaultCase = defaultCase
     }
     
-    public override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+    public override func touchesBegan(_ touches: Set<UITouch>,
+                                      with event: UIEvent?) {
         dismissKeyboard()
         closeRecorder()
     }
     
     func showMessage(message: String) {
-        let alert = UIAlertController(title: "خطا", message: message, preferredStyle: .alert)
-        let actionOK = UIAlertAction(title: "تایید", style:  .destructive, handler: nil)
+        let alert = UIAlertController(title: "خطا",
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let actionOK = UIAlertAction(title: "تایید",
+                                     style:  .destructive,
+                                     handler: nil)
+        
         alert.addAction(actionOK)
         present(alert, animated: true, completion: nil)
     }
@@ -139,11 +147,14 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
     }
 
     @IBAction func didTapAttachImage(_ sender: Any) {
-        let alertPic = UIAlertController(title: "آپلود تصویر", message: "انتخاب کنید", preferredStyle: .actionSheet)
+        let alertPic = UIAlertController(title: "آپلود تصویر",
+                                         message: "انتخاب کنید",
+                                         preferredStyle: .actionSheet)
         
         let galleryButton = UIAlertAction(title: "گالری", style: .default) { _ in
             switch PHPhotoLibrary.authorizationStatus() {
             case .authorized: self.showGalleryWith(UIImagePickerControllerSourceType.photoLibrary)
+                
             case .denied: UIApplication.shared.open(URL(string : UIApplicationOpenSettingsURLString)!,
                                                                     options: [:],
                                                                     completionHandler: nil)
@@ -160,10 +171,13 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
         let cameraButton = UIAlertAction(title: "دوربین", style: .destructive) { _ in
             switch AVCaptureDevice.authorizationStatus(for: AVMediaType.video) {
             case .authorized: self.showGalleryWith(UIImagePickerControllerSourceType.camera)
+                
             case .denied: UIApplication.shared.open(URL(string : UIApplicationOpenSettingsURLString)!,
                                                     options: [:],
                                                     completionHandler: nil)
-            default: AVCaptureDevice.requestAccess(for: AVMediaType.video, completionHandler: { (granted: Bool) -> Void in
+                
+            default: AVCaptureDevice.requestAccess(for: AVMediaType.video,
+                                                   completionHandler: { (granted: Bool) -> Void in
                 DispatchQueue.main.async {
                     if granted == true {
                         self.showGalleryWith(UIImagePickerControllerSourceType.camera)                            }
@@ -171,7 +185,9 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
             }
         }
         
-        let cancel = UIAlertAction(title: "انصراف", style: .cancel, handler: nil)
+        let cancel = UIAlertAction(title: "انصراف",
+                                   style: .cancel,
+                                   handler: nil)
 
         alertPic.addAction(galleryButton)
         alertPic.addAction(cameraButton)
@@ -194,7 +210,10 @@ extension AddCaseManagementVC {
     
     fileprivate func setupVoiceRecorder() {
         deleteAudio()
-        vr = VoiceView(frame: CGRect(x: 0, y: height, width: width, height: 150))
+        vr = VoiceView(frame: CGRect(x: 0,
+                                     y: height,
+                                     width: width,
+                                     height: 150))
         
         vr.onRecord = { isRecording in
             if isRecording {
@@ -230,7 +249,8 @@ extension AddCaseManagementVC {
                              AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue,
                              AVSampleRateKey: 12000 ]
         do {
-            self.soundRecorder = try AVAudioRecorder(url: self.getFileURL(), settings: recordSetting)
+            self.soundRecorder = try AVAudioRecorder(url: self.getFileURL(),
+                                                     settings: recordSetting)
             self.soundRecorder.delegate = self
             self.soundRecorder.prepareToRecord()
         } catch(let error) {
@@ -240,7 +260,8 @@ extension AddCaseManagementVC {
     }
     
     func getCatchDirectory() -> URL {
-        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        let paths = FileManager.default.urls(for: .documentDirectory,
+                                             in: .userDomainMask)
         return paths[0]
         
     }
@@ -262,7 +283,10 @@ extension AddCaseManagementVC {
     }
     
     func showRecorder() {
-        UIView.transition(with: vr, duration: 0.3, options: .showHideTransitionViews, animations: {
+        UIView.transition(with: vr,
+                          duration: 0.3,
+                          options: .showHideTransitionViews,
+                          animations: {
             self.vr.frame.origin.y = self.height - 100
         }, completion: { _ in
             self.isOpen = true
@@ -271,7 +295,10 @@ extension AddCaseManagementVC {
     
     func closeRecorder() {
         
-        UIView.transition(with: vr, duration: 0.2, options: .showHideTransitionViews, animations: {
+        UIView.transition(with: vr,
+                          duration: 0.2,
+                          options: .showHideTransitionViews,
+                          animations: {
             self.vr.frame.origin.y = self.height
         }, completion: { _ in
             self.isOpen = false
@@ -293,19 +320,22 @@ extension AddCaseManagementVC {
         }
     }
     
-    public func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
+    public func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder,
+                                                successfully flag: Bool) {
         print("finish record")
 //        btnPlay.isHidden = false
 //        btnDeleteAudio.isHidden = false
     }
     
-    public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+    public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer,
+                                            successfully flag: Bool) {
         print("finish play")
     }
 }
 
 // Take Picture
 extension AddCaseManagementVC: UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+    
     public func imagePickerController(_ picker: UIImagePickerController,
                                       didFinishPickingMediaWithInfo info: [String : Any]) {
         
@@ -363,7 +393,10 @@ extension AddCaseManagementVC: UIImagePickerControllerDelegate,UINavigationContr
             }
         }
         
-        let rect = CGRect(x: 0, y: 0, width: actualWidth, height: actualHeight)
+        let rect = CGRect(x: 0,
+                          y: 0,
+                          width: actualWidth,
+                          height: actualHeight)
         UIGraphicsBeginImageContext(rect.size);
         image.draw(in: rect)
         let img = UIGraphicsGetImageFromCurrentImageContext();
@@ -375,8 +408,13 @@ extension AddCaseManagementVC: UIImagePickerControllerDelegate,UINavigationContr
             return image
         }
         
-        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
-        image.draw(in: CGRect(x: 0, y: 0, width: image.size.width, height: image.size.height))
+        UIGraphicsBeginImageContextWithOptions(image.size,
+                                               false,
+                                               image.scale)
+        image.draw(in: CGRect(x: 0,
+                              y: 0,
+                              width: image.size.width,
+                              height: image.size.height))
         
         if let normalizedImage: UIImage = UIGraphicsGetImageFromCurrentImageContext() {
             UIGraphicsEndImageContext()
@@ -386,7 +424,10 @@ extension AddCaseManagementVC: UIImagePickerControllerDelegate,UINavigationContr
         }
     }
     
-    func compressTo(_ expectedSizeInMb:Float, image: UIImage, callback : @escaping ((Data?)->Void)) {
+    func compressTo(_ expectedSizeInMb:Float,
+                    image: UIImage,
+                    callback : @escaping ((Data?)->Void)) {
+        
         DispatchQueue.global(qos: .userInitiated).async {
             var imageData = UIImagePNGRepresentation(image)
             let sizeInBytes = expectedSizeInMb * 1024.0 * 1024.0
@@ -402,7 +443,8 @@ extension AddCaseManagementVC: UIImagePickerControllerDelegate,UINavigationContr
                         var compressingValue:CGFloat = 1.0
                         while (needCompress && compressingValue > 0.0) {
                             
-                            if let data:Data = UIImageJPEGRepresentation(self.fixOrientation(image: image), compressingValue){
+                            if let data:Data = UIImageJPEGRepresentation(self.fixOrientation(image: image),
+                                                                         compressingValue){
                                 
                                 if Float(data.count) < sizeInBytes {
                                     needCompress = false

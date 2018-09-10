@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in CaseManagementService.getCaseList(primaryMobile:issueGuid:fromDate:toDate:caseTypeCode:isAnswered:trackingCode:jvCode:callBack:):CaseManagementService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MainVC.getIssues():MainVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewModel.issueList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "MainVC.actionSegment():MainVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segment.selectedSegmentIndex">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in MainVC.actionSegment():MainVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MainVC.tableView(_:numberOfRowsInSection:):MainVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segment.selectedSegmentIndex">
+            </PersistentString>
+            <PersistentString
+               value = "viewModel.issueList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in CaseService.getCaseItems(callBack:):CaseService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in MainVC.viewDidLoad():MainVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewModel.issueList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

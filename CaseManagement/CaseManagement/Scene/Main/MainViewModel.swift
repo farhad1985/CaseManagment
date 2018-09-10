@@ -12,6 +12,7 @@ protocol MainViewModelDelegate {
 }
 class MainViewModel {
     var list : [CaseItem] = []
+    var issueList : [[CaseIssue]] = []
     var delegate : MainViewModelDelegate!
     var index  = 0 {
         didSet{
@@ -19,8 +20,10 @@ class MainViewModel {
         }
     }
     
-    func downloadImage(_ url : URL,type : String ,completionHandler : @escaping (_ data : Data?)->Void)
-    {
+    func downloadImage(_ url : URL,
+                       type : String ,
+                       completionHandler : @escaping (_ data : Data?)->Void) {
+        
         URLSession.shared.dataTask(with: url, completionHandler: { (data, response, error) in
             
             if error != nil {
@@ -34,24 +37,25 @@ class MainViewModel {
         }).resume()
         
     }
-    func downloadFile(url : URL , type : String , completionHandler : @escaping (_ path : String?)->Void){
-    var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-    let fileName = url.getQueryStringParameter(param: "name") ?? url.lastPathComponent
-    documentsURL.appendPathComponent( fileName + "." + type)
-    if FileManager.default.fileExists(atPath: documentsURL.relativePath)
-    {
-        completionHandler(documentsURL.relativePath)
-    }
-    else
-    {
-        let task = URLSession.shared.downloadTask(with: url) { localURL, urlResponse, error in
-            if let localURL = localURL {
-                completionHandler(localURL.absoluteString)
-            }
-        }
+    func downloadFile(url : URL ,
+                      type : String ,
+                      completionHandler : @escaping (_ path : String?)->Void) {
         
-        task.resume()
-
-    }
+        var documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        let fileName = url.getQueryStringParameter(param: "name") ?? url.lastPathComponent
+        documentsURL.appendPathComponent( fileName + "." + type)
+        
+        if FileManager.default.fileExists(atPath: documentsURL.relativePath){
+            completionHandler(documentsURL.relativePath)
+        } else {
+            
+            let task = URLSession.shared.downloadTask(with: url) { localURL, urlResponse, error in
+                if let localURL = localURL {
+                    completionHandler(localURL.absoluteString)
+                }
+            }
+            
+            task.resume()
+        }
     }
 }

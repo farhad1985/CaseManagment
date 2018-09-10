@@ -6,10 +6,14 @@
 //  Copyright © 2018 Golrangsys. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public protocol CaseManagementProtocol {
     func save()
-    func getCaseItems() -> [CaseItem]
-//    func getCases() -> [CaseItem]
+    func getCaseItems(callBack: @escaping (([CaseItem]) -> ()))
+    func getCases(callBack: @escaping (([CaseIssue]) -> ()))
+    
+    // show data into the custom cell
+    func register(table: UITableView)
+    func getIssueCell(table: UITableView, index: IndexPath, item: CaseIssue) -> UITableViewCell
 }
