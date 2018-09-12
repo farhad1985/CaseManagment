@@ -1,43 +1,30 @@
 //
 //  Route.swift
-//  ICRM-Customer
+//  Patoghi Driver
 //
-//  Created by Farhad on 4/30/17.
-//  Copyright © 2017 Farhad. All rights reserved.
+//  Created by Farhad Faramarzi on 4/29/18.
+//  Copyright © 2018 Golrang. All rights reserved.
 //
 
 import Foundation
 
-enum BaseURL: String {
-    case okcrm = "https://okcrm-service.gig.services"
-}
+let baseUrl =  "https://gtarabar-api.gig.services"
+//let baseUrl =  "https://customerapi.patoughi.com"
 
 enum Route: String {
-
-    // MARK: - CaseManagement
     
-    case issueCreateCase = "/CaseManagement/IssueCreateCase"
-    case issueGetCaseType = "/CaseManagement/IssueGetCaseType"
-    case issueUserGetCaseList = "/CaseManagement/IssueUserGetCaseList"
-    case issueCaseReply = "/CaseManagement/IssueCaseReply"
-}
-
-extension Route {
+    // Case
     
-    func url() -> String {
-        var baseUrl = ""
-        
-        switch self {
-        default:
-            baseUrl = BaseURL.okcrm.rawValue
-        }
-        
+    case createCase = "/C/CRM/CreateCase"
+    case caseTypes = "/C/CRM/CaseTypes"
+    case caseSubTypes = "/C/CRM/CaseSubTypes"
+    case getCases = "/C/CRM/GetCases"
+    case getCaseStatus = "/C/CRM/GetCaseStatus"
+    
+    // Token
+    case getCustomerToken = "/General/GetCustomerToken"
+
+    var url: String {
         return baseUrl + self.rawValue
     }
 }
-
-
-
-
-
-

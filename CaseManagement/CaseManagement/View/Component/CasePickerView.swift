@@ -12,7 +12,7 @@ class CasePickerView: TextFiledCM {
     
     let pickerView = UIPickerView()
     var dataSource: [CaseItem] = []
-    var selectCase: CaseItem?
+    private var selectCase: CaseItem?
     
     var defaultCase: CaseItem? = nil {
         didSet {
@@ -23,11 +23,10 @@ class CasePickerView: TextFiledCM {
             
             if index >= 0 {
                 pickerView.selectRow(index, inComponent: 0, animated: true)
-//                if self.dataSource.count > 0 && index < dataSource.count {
-                    let caseSource = self.dataSource[index]
-                    text = caseSource.title
-                    onChange?(caseSource)
-//                }
+                let caseSource = self.dataSource[index]
+                text = caseSource.title
+                selectCase = caseSource
+                onChange?(caseSource)
             }
         }
     }
@@ -47,7 +46,7 @@ class CasePickerView: TextFiledCM {
     
     func setDataSource(dataSource: [CaseItem], defaultCase: CaseItem? = nil) {
         self.dataSource = dataSource
-//        self.defaultCase = defaultCase ?? dataSource[0]
+        self.defaultCase = defaultCase ?? dataSource[0]
         pickerView.reloadAllComponents()
     }
 
@@ -70,7 +69,13 @@ class CasePickerView: TextFiledCM {
     @objc
     func selectItem(){
         guard let selectedCase = self.selectCase else {return}
+        text = selectedCase.title
         onChange?(selectedCase)
+    }
+    
+    func getSelectedItem() -> CaseItem? {
+        guard let selectedCase = self.selectCase else {return nil }
+        return selectedCase
     }
 }
 
@@ -94,6 +99,6 @@ extension CasePickerView: UIPickerViewDataSource, UIPickerViewDelegate {
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.selectCase = self.dataSource[row]
-        text = self.dataSource[row].title
+//        text = self.dataSource[row].title
     }
 }

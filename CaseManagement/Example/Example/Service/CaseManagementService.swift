@@ -9,6 +9,12 @@
 import Alamofire
 import AlamofireObjectMapper
 
+func getToken() -> String {
+    return token
+}
+
+var token  = ""
+
 struct CaseCustomer {
     var primaryMobile: String!
     var joinVentureId: String!
@@ -20,151 +26,103 @@ struct CaseCustomer {
 
 
 struct CaseManagementService {
-    private let token = "37456D20-10EB-E711" //"iiii-cccc-rrrrrrrr-mmmm"
-    private let subSystem = 1 //20
-    private let version = 0
-    private let deviceType = 10 //2
-    
-    static let shared = CaseManagementService()
-    
-    private init() {}
-    
-    func getCreateCase(caseCustomer: CaseCustomer, callBack: @escaping (Result<MessageSerivce>) -> Void) {
-        var params: Parameters = [
-            "PrimaryMobile": caseCustomer.primaryMobile,
-            "JoinVentureId": caseCustomer.joinVentureId,
-            "IssueTittle": caseCustomer.issueTitle,
-            "CaseTypeCode": caseCustomer.caseTypeCode,
-            "IssueDescription": caseCustomer.issueDescription,
-            "Token": token,
-            "SubSystem": subSystem,
-            "Version": version,
-            "DeviceType": deviceType
-        ]
-        
-        if let fileByte = caseCustomer.fileByte {
-            
-            if !fileByte.isEmpty {
-                params["FileByte"] = fileByte
-                params["FileName"] = "filename.png"
-            }
-        }
-        
-        Alamofire.request(Route.issueCreateCase.url(), method: .post, parameters: params, encoding: JSONEncoding.default).responseObject { (response: DataResponse<MessageSerivce>) in
-            switch response.result {
-            case .success(let value):
-                callBack(Result.success(value))
-                
-            case .failure(let error):
-                callBack(Result.failure(error))
-            }
+    static func getTypes(_ callback: @escaping (Result<ArrayResponse<CaseType>>)->Void) {
+        Alamofire.request(Route.caseTypes.url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).validate().responseObject
+            {
+                (response:DataResponse<ArrayResponse<CaseType>>) in
+                switch response.result
+                {
+                case .failure(let error):
+                    callback(Result.failure(error))
+                case .success(let value):
+                    callback(Result.success(value))
+                }
         }
     }
     
-    func getCaseType(callBack: @escaping (Result<IssueGetCaseType>) -> Void) {
-        let params: Parameters = [
-            "Token": token,
-            "SubSystem": subSystem,
-            "Version": version,
-            "DeviceType": deviceType
-        ]
-        
-        Alamofire.request(Route.issueGetCaseType.url(), method: .post, parameters: params).responseObject { (response: DataResponse<IssueGetCaseType>) in
-            
-            switch response.result {
-            case .success(let value):
-                callBack(Result.success(value))
-                
-            case .failure(let error):
-                callBack(Result.failure(error))
-            }
+    
+    static func getSubTypes(_ type : Int ,_ callback: @escaping (Result<ArrayResponse<SubCaseType>>)->Void)
+    {
+        Alamofire.request(Route.caseSubTypes.url + "/\(type)", method: .get, parameters: nil, encoding: URLEncoding.default,headers: nil).validate().responseObject
+            {
+                (response:DataResponse<ArrayResponse<SubCaseType>>) in
+                switch response.result
+                {
+                case .failure(let error):
+                    callback(Result.failure(error))
+                case .success(let value):
+                    callback(Result.success(value))
+                }
         }
     }
     
-    func getCaseList(primaryMobile: String,
-                     issueGuid: String? = nil,
-                     fromDate: String? = nil,
-                     toDate: String? = nil,
-                     caseTypeCode: Int? = nil,
-                     isAnswered: Bool? = nil,
-                     trackingCode:String? = nil,
-                     jvCode:String? = nil,
-                     callBack: @escaping (Result<Issue>) -> Void) {
-        
-        var params: Parameters = [
-            "PrimaryMobile": primaryMobile,
-            "Token": token,
-            "SubSystem": subSystem,
-            "Version": version,
-            "DeviceType": deviceType,
-        ]
-        
-        if let caseTypeCode = caseTypeCode {
-            params["CaseTypeCode"] = caseTypeCode
-        }
-        
-        if let fromDate = fromDate {
-            params["FromDate"] = fromDate
-        }
-        
-        if let toDate = toDate {
-            params["ToDate"] = toDate
-        }
-        
-        if let isAnswered = isAnswered {
-            params["IsAnswered"] = "\(isAnswered)"
-        }
-        
-        if let trackingCode = trackingCode {
-            params["IssueCode"] = trackingCode
-        }
-        
-        if let jvCode = jvCode {
-            params["JoinVentureId"] = jvCode
-        }
-        
-        print("params :: \(params)")
-        
-        Alamofire.request(Route.issueUserGetCaseList.url(), method: .post, parameters: params).responseObject { (response: DataResponse<Issue>) in
-            
-            switch response.result {
-            case .success(let value):
-                callBack(Result.success(value))
-                
-            case .failure(let error):
-                callBack(Result.failure(error))
-            }
+    static func getCases(_ mobile : String, customerId: Int, _ callback: @escaping (Result<ObjectArrayResponse<Case>>)->Void)
+    {
+        var param: [String: Any]  = Param( pageNumber: 1, pageSize: 1000).toJSON()
+        param["mobilePhone"] = mobile
+        param["customerId"] = customerId
+        Alamofire.request(Route.getCases.url, method: .post, parameters:param, encoding: JSONEncoding.default).validate().responseObject
+            {
+                (response:DataResponse<
+                ObjectArrayResponse<Case>>) in
+                switch response.result
+                {
+                case .failure(let error):
+                    callback(Result.failure(error))
+                case .success(let value):
+                    callback(Result.success(value))
+                }
         }
     }
     
-    func issueCaseReply(issueGuid: String,
-                        issuReply: String,
-                        callBack: @escaping (Result<MessageSerivce>) -> Void) {
-        let params: Parameters = [
-            "IssueGuid": issueGuid,
-            "IssuReply": issuReply,
-            "Token": token,
-            "SubSystem": subSystem,
-            "Version": version,
-            "DeviceType": deviceType
-        ]
-        
-        Alamofire.request(Route.issueCaseReply.url(), method: .post, parameters: params).responseObject { (response: DataResponse<MessageSerivce>) in
-            
-            switch response.result {
-            case .success(let value):
-                callBack(Result.success(value))
-                
-            case .failure(let error):
-                callBack(Result.failure(error))
-            }
+    
+    static func getCustomerCases(_ customerId : UInt64,_ callback: @escaping (Result<ObjectResponse<CaseResponse>>)->Void)
+    {
+        Alamofire.request(Route.getCases.url, method: .get, parameters: ["customerId" : customerId], encoding: URLEncoding.default).validate().responseObject
+            {
+                (response:DataResponse<ObjectResponse<CaseResponse>>) in
+                switch response.result
+                {
+                case .failure(let error):
+                    callback(Result.failure(error))
+                case .success(let value):
+                    callback(Result.success(value))
+                }
+        }
+    }
+    
+    
+    static func addCase(_ newCase : NewCase,_ callback: @escaping (Result<ArrayResponse<Case>>)->Void)
+    {
+        print("\(Route.createCase.url) with params :: \(String(newCase.toJSONString() ?? ""))")
+        Alamofire.request(Route.createCase.url, method: .post, parameters: newCase.toJSON() , encoding: JSONEncoding.default).validate().responseObject
+            {
+                (response:DataResponse<ArrayResponse<Case>>) in
+                switch response.result
+                {
+                case .failure(let error):
+                    callback(Result.failure(error))
+                case .success(let value):
+                    callback(Result.success(value))
+                }
+        }
+    }
+    
+    
+    static func getToken() {
+        let param: [String: Any] = ["mobilePhone": "09124141680", "appCode": 3, "deviceTypeCode": 1]
+        Alamofire.request(Route.getCustomerToken.url,
+                          method: .post,
+                          parameters: param,
+                          encoding: JSONEncoding.default)
+            .responseObject { (response:DataResponse<PrimitiveObjectResponse<String>>) in
+                switch response.result {
+                case .failure(let error):
+                    print(error.localizedDescription)
+                case .success(let value):
+                    print(value)
+                    token = value.data ?? ""
+                }
         }
     }
 }
-
-
-
-
-
-
-

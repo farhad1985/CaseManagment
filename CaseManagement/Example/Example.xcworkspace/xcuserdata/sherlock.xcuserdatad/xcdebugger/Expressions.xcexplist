@@ -3,7 +3,18 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in CaseManagementService.getCaseList(primaryMobile:issueGuid:fromDate:toDate:caseTypeCode:isAnswered:trackingCode:jvCode:callBack:):CaseManagementService.swift">
+         contextName = "closure #2 in MainVC.viewDidLoad():MainVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.viewModel.issueList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in CaseService.getCaseItems(callBack:):CaseService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CaseService.save(caseTypeCode:subCaseTypeCode:issueDescription:picFileByte:audioFileByte:):CaseService.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in MainVC.getIssues():MainVC.swift">
@@ -14,6 +25,35 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "IssueList.mapping(map:):Issue.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ViewController.viewDidLoad():ViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CaseService.getCases(callBack:):CaseService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "MainVC.tableView(_:numberOfRowsInSection:):MainVC.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "segment.selectedSegmentIndex">
+            </PersistentString>
+            <PersistentString
+               value = "viewModel.list">
+            </PersistentString>
+            <PersistentString
+               value = "viewModel.issueList">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "static CaseManagementService.getToken():CaseManagementService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CaseManagementService.getCaseList(primaryMobile:issueGuid:fromDate:toDate:caseTypeCode:isAnswered:trackingCode:jvCode:callBack:):CaseManagementService.swift">
+      </ContextState>
+      <ContextState
          contextName = "MainVC.actionSegment():MainVC.swift">
          <PersistentStrings>
             <PersistentString
@@ -22,10 +62,7 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in MainVC.actionSegment():MainVC.swift">
-      </ContextState>
-      <ContextState
-         contextName = "MainVC.tableView(_:numberOfRowsInSection:):MainVC.swift">
+         contextName = "MainVC.tableView(_:cellForRowAt:):MainVC.swift">
          <PersistentStrings>
             <PersistentString
                value = "segment.selectedSegmentIndex">
@@ -36,15 +73,16 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in CaseService.getCaseItems(callBack:):CaseService.swift">
+         contextName = "closure #1 in static CaseManagementService.getToken():CaseManagementService.swift">
       </ContextState>
       <ContextState
-         contextName = "closure #2 in MainVC.viewDidLoad():MainVC.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "self.viewModel.issueList">
-            </PersistentString>
-         </PersistentStrings>
+         contextName = "closure #1 in MainVC.actionSegment():MainVC.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CaseService.getCaseItems(callBack:):CaseService.swift">
+      </ContextState>
+      <ContextState
+         contextName = "IssueGetCaseType.mapping(map:):IssueGetCaseType.swift">
       </ContextState>
    </ContextStates>
 </VariablesViewState>

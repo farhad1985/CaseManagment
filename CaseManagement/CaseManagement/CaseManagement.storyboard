@@ -61,7 +61,7 @@
                     <connections>
                         <outlet property="segment" destination="76D-rd-mCf" id="HF8-eJ-Avj"/>
                         <outlet property="tableView" destination="iXf-kb-gD2" id="YMw-W8-hFq"/>
-                        <segue destination="TXV-1V-0sY" kind="show" id="bkN-At-dtl"/>
+                        <segue destination="TXV-1V-0sY" kind="show" identifier="addcase" id="bkN-At-dtl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tbF-dp-4gL" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -132,7 +132,6 @@
                                                     <constraint firstAttribute="height" constant="160" id="kru-e6-uvy"/>
                                                 </constraints>
                                                 <inset key="scrollIndicatorInsets" minX="8" minY="8" maxX="8" maxY="8"/>
-                                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
@@ -277,6 +276,9 @@
                                                 <state key="normal" title="ثبت">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="saveIssue:" destination="TXV-1V-0sY" eventType="touchUpInside" id="U6U-Id-49z"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -318,7 +320,8 @@
                         <outlet property="btnPlay" destination="054-OP-3qW" id="2FS-O9-8VG"/>
                         <outlet property="caseTextField" destination="f5g-4S-i1k" id="2Rf-m7-7xO"/>
                         <outlet property="imgAttachment" destination="iVa-sI-xVt" id="Flu-s5-M5L"/>
-                        <outlet property="partTextField" destination="6Se-vL-nzg" id="2gy-5D-Xwf"/>
+                        <outlet property="subCaseTextField" destination="6Se-vL-nzg" id="BTC-c9-vUU"/>
+                        <outlet property="txtContentIssue" destination="qIx-NK-dV0" id="cH0-6N-KyK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X4F-va-9LE" userLabel="First Responder" sceneMemberID="firstResponder"/>

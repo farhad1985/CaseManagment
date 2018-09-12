@@ -64,11 +64,13 @@ public class MainVC: UIViewController {
     }
     
     func getIssues() {
-        self.viewModel.issueList.removeAll()
-        for _ in self.viewModel.list {
-            self.viewModel.issueList.append([])
-        }
         service?.getCases(callBack: { (caseIssueList) in
+            if caseIssueList.count > 0 {
+                self.viewModel.issueList.removeAll()
+                for _ in self.viewModel.list {
+                    self.viewModel.issueList.append([])
+                }
+            }
             for issue in caseIssueList {
                 for item in self.viewModel.list.enumerated() {
                     if issue.issueCaseTypeCode == item.element.id {
@@ -76,7 +78,6 @@ public class MainVC: UIViewController {
                     }
                 }
             }
-            print(self.viewModel.issueList)
             self.tableView.reloadData()
             self.pullToRefresh.endRefreshing()
         })
@@ -89,8 +90,8 @@ public class MainVC: UIViewController {
     
     @IBAction func onAddClick(_ sender: Any) {
         let vc = AddCaseManagementVC.create()
-        let _case = viewModel.issueList[self.viewModel.index]
         vc?.setDataSource(castRequests: self.viewModel.list)
+        vc?.service = service
         self.navigationController?.pushViewController(vc!, animated: true)
     }
     
@@ -184,7 +185,7 @@ extension MainVC : MainViewModelDelegate {
 
 extension MainVC : UITableViewDelegate , UITableViewDataSource {
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if viewModel.list.count > 0 {
+        if viewModel.issueList.count > 0 {
             return viewModel.issueList[segment.selectedSegmentIndex].count
         }
         return 0

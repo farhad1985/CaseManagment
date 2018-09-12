@@ -10,16 +10,9 @@ import Foundation
 
 public struct CaseItem {
     
-    var id: Int
-    var title: String
-    var partsCast: [CaseItem] = []
-    var caseItems:  [Case] = []
-    
-    public init(id: Int, title: String, partsCast: [CaseItem]) {
-        self.id = id
-        self.title = title
-        self.partsCast = partsCast
-    }
+    public var id: Int
+    public var title: String
+    public var caseItems:  [Case] = []
     
     public init(id: Int, title: String) {
         self.id = id

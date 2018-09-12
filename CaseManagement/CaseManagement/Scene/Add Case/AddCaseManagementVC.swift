@@ -10,18 +10,22 @@ import UIKit
 import AVFoundation
 import Photos
 
+
 public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAudioRecorderDelegate {
     
     @IBOutlet weak var caseTextField: CasePickerView!
-    @IBOutlet weak var partTextField: CasePickerView!
+    @IBOutlet weak var subCaseTextField: CasePickerView!
+
+    @IBOutlet weak var btnDeleteImage: UIButton!
+    @IBOutlet weak var btnDeleteAudio: UIButton!
+    @IBOutlet weak var btnPlay: UIButton!
+    @IBOutlet weak var txtContentIssue: CaseTextView!
+    
     @IBOutlet weak var imgAttachment: UIImageView! {
         didSet {
             self.imgAttachment.layer.cornerRadius = 5
         }
     }
-    @IBOutlet weak var btnDeleteImage: UIButton!
-    @IBOutlet weak var btnDeleteAudio: UIButton!
-    @IBOutlet weak var btnPlay: UIButton!
     
     var defaultCase: CaseItem?
     var defaultPartCase: CaseItem?
@@ -40,13 +44,78 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
     var audioSession = AVAudioSession.sharedInstance()
     var soundRecorder: AVAudioRecorder!
     var soundPlayer: AVAudioPlayer!
-    
+    private var audioUploaded : String? = nil
+
     // pic
     private var imageFilePath : String! = ""
     private var imageUploaded : String? = nil
     
     var filename = "audioFile.m4a"
+    var service: CaseManagementProtocol?
     
+    private func handleOnChanges() {
+        caseTextField.onChange = { caseRequest in
+            self.service?.getSubCaseItems(parent: caseRequest, callBack: { (subItems) in
+                guard subItems.count > 0 else {
+                    self.subCaseTextField.isHidden = true
+                    return
+                }
+                self.subCaseTextField.isHidden = false
+                self.subCaseTextField.setDataSource(dataSource: subItems)
+                self.caseSelected = caseRequest
+            })
+            self.dismissKeyboard()
+        }
+        
+        subCaseTextField.onChange = { partCaseRequest in
+            self.partCaseSelected = partCaseRequest
+            self.dismissKeyboard()
+        }
+    }
+    
+    private func setDefaultCases() {
+        if let dCase = defaultCase {
+            caseTextField.setDataSource(dataSource: castRequests,
+                                        defaultCase: dCase)
+        } else {
+            caseTextField.setDataSource(dataSource: castRequests)
+        }
+    }
+    
+    private func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+    
+    public func setDataSource(castRequests: [CaseItem],
+                              defaultCase: CaseItem? = nil) {
+        self.castRequests = castRequests
+        self.defaultCase = defaultCase
+    }
+ 
+    func showMessage(message: String) {
+        let alert = UIAlertController(title: "خطا",
+                                      message: message,
+                                      preferredStyle: .alert)
+        
+        let actionOK = UIAlertAction(title: "تایید",
+                                     style:  .destructive,
+                                     handler: nil)
+        
+        alert.addAction(actionOK)
+        present(alert, animated: true, completion: nil)
+    }
+    
+    func showGalleryWith(_ sourceType : UIImagePickerControllerSourceType) {
+        let imagePicker = UIImagePickerController()
+        imagePicker.navigationBar.isTranslucent = false
+        imagePicker.delegate = self
+        imagePicker.sourceType = sourceType
+        self.present(imagePicker, animated: true, completion: nil)
+    }
+
+}
+
+extension AddCaseManagementVC {
     public override func viewDidLoad() {
         super.viewDidLoad()
         handleOnChanges()
@@ -74,63 +143,10 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
         prepareplayer()
     }
     
-    private func handleOnChanges() {
-        caseTextField.onChange = { caseRequest in
-            self.partTextField.setDataSource(dataSource: caseRequest.partsCast)
-            self.caseSelected = caseRequest
-            self.dismissKeyboard()
-        }
-        
-        partTextField.onChange = { partCaseRequest in
-            self.partCaseSelected = partCaseRequest
-            self.dismissKeyboard()
-        }
-    }
-    
-    private func setDefaultCases() {
-        if let dCase = defaultCase {
-            caseTextField.setDataSource(dataSource: castRequests,
-                                        defaultCase: dCase)
-        } else {
-            caseTextField.setDataSource(dataSource: castRequests)
-        }
-    }
-    
-    private func dismissKeyboard() {
-        self.view.endEditing(true)
-    }
-    
-    public func setDataSource(castRequests: [CaseItem],
-                              defaultCase: CaseItem? = nil) {
-        self.castRequests = castRequests
-        self.defaultCase = defaultCase
-    }
-    
     public override func touchesBegan(_ touches: Set<UITouch>,
                                       with event: UIEvent?) {
         dismissKeyboard()
         closeRecorder()
-    }
-    
-    func showMessage(message: String) {
-        let alert = UIAlertController(title: "خطا",
-                                      message: message,
-                                      preferredStyle: .alert)
-        
-        let actionOK = UIAlertAction(title: "تایید",
-                                     style:  .destructive,
-                                     handler: nil)
-        
-        alert.addAction(actionOK)
-        present(alert, animated: true, completion: nil)
-    }
-    
-    func showGalleryWith(_ sourceType : UIImagePickerControllerSourceType) {
-        let imagePicker = UIImagePickerController()
-        imagePicker.navigationBar.isTranslucent = false
-        imagePicker.delegate = self
-        imagePicker.sourceType = sourceType
-        self.present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func didTapDeleteAudio(_ sender: Any) {
@@ -145,7 +161,7 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
                                       in: Bundle(identifier: "CaseManagement"),
                                       compatibleWith: nil)
     }
-
+    
     @IBAction func didTapAttachImage(_ sender: Any) {
         let alertPic = UIAlertController(title: "آپلود تصویر",
                                          message: "انتخاب کنید",
@@ -156,14 +172,14 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
             case .authorized: self.showGalleryWith(UIImagePickerControllerSourceType.photoLibrary)
                 
             case .denied: UIApplication.shared.open(URL(string : UIApplicationOpenSettingsURLString)!,
-                                                                    options: [:],
-                                                                    completionHandler: nil)
-
+                                                    options: [:],
+                                                    completionHandler: nil)
+                
             default: PHPhotoLibrary.requestAuthorization({ (granted) in
-                    DispatchQueue.main.async {
-                        if granted == .authorized {
-                            self.showGalleryWith(UIImagePickerControllerSourceType.photoLibrary)                        }
-                    }})
+                DispatchQueue.main.async {
+                    if granted == .authorized {
+                        self.showGalleryWith(UIImagePickerControllerSourceType.photoLibrary)                        }
+                }})
             }
         }
         
@@ -178,22 +194,33 @@ public class AddCaseManagementVC: UIViewController, AVAudioPlayerDelegate, AVAud
                 
             default: AVCaptureDevice.requestAccess(for: AVMediaType.video,
                                                    completionHandler: { (granted: Bool) -> Void in
-                DispatchQueue.main.async {
-                    if granted == true {
-                        self.showGalleryWith(UIImagePickerControllerSourceType.camera)                            }
-                    }})
+                                                    DispatchQueue.main.async {
+                                                        if granted == true {
+                                                            self.showGalleryWith(UIImagePickerControllerSourceType.camera)                            }
+                                                    }})
             }
         }
         
         let cancel = UIAlertAction(title: "انصراف",
                                    style: .cancel,
                                    handler: nil)
-
+        
         alertPic.addAction(galleryButton)
         alertPic.addAction(cameraButton)
         alertPic.addAction(cancel)
-
+        
         self.present(alertPic, animated: true, completion: nil)
+    }
+    
+    @IBAction func saveIssue(_ sender: Any) {
+        guard let caseId = caseTextField.getSelectedItem()?.id,
+            let subCaseId = subCaseTextField.getSelectedItem()?.id
+            else {return}
+        service?.save(caseTypeCode: caseId,
+                      subCaseTypeCode: subCaseId,
+                      issueDescription: txtContentIssue.text,
+                      picFileByte: imageUploaded,
+                      audioFileByte: audioUploaded)
     }
 }
 
@@ -213,7 +240,7 @@ extension AddCaseManagementVC {
         vr = VoiceView(frame: CGRect(x: 0,
                                      y: height,
                                      width: width,
-                                     height: 150))
+                                     height: 170))
         
         vr.onRecord = { isRecording in
             if isRecording {
@@ -225,8 +252,6 @@ extension AddCaseManagementVC {
             } else {
                 if self.soundRecorder != nil {
                     self.soundRecorder.stop()
-                    self.btnPlay.isHidden = false
-                    self.btnDeleteAudio.isHidden = false
                 }
             }
             
@@ -287,7 +312,7 @@ extension AddCaseManagementVC {
                           duration: 0.3,
                           options: .showHideTransitionViews,
                           animations: {
-            self.vr.frame.origin.y = self.height - 100
+            self.vr.frame.origin.y = self.height - 130
         }, completion: { _ in
             self.isOpen = true
         })
@@ -307,24 +332,34 @@ extension AddCaseManagementVC {
     }
     
     func deleteAudio() {
-        if FileManager.default.fileExists(atPath: getFileURL().absoluteString){
-            print("its avaliable")
-        }
         do {
             try FileManager.default.removeItem(at: getFileURL())
-            btnPlay.isHidden = true
-            btnDeleteAudio.isHidden = true
-
+            audioUploaded = nil
         } catch(let error) {
             print("error delete file >> \(error.localizedDescription)")
+        }
+        btnPlay.isHidden = true
+        btnDeleteAudio.isHidden = true
+    }
+    
+    func getContentFileFromPath(path : URL) {
+        do {
+            let data = try Data(contentsOf: path)
+            convertBase64(data: data) { (base64) in
+                self.audioUploaded = base64
+            }
+            self.btnPlay.isHidden = false
+            self.btnDeleteAudio.isHidden = false
+        }
+        catch(let error) {
+            print(error.localizedDescription)
         }
     }
     
     public func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder,
                                                 successfully flag: Bool) {
         print("finish record")
-//        btnPlay.isHidden = false
-//        btnDeleteAudio.isHidden = false
+        getContentFileFromPath(path: getFileURL())
     }
     
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer,

@@ -12,7 +12,7 @@ class VoiceView: UIView, Connectable {
     
     @IBOutlet weak var btnRecorder: CaseButton!
     
-    @IBOutlet weak var imgPause: UIImageView!
+    @IBOutlet weak var imgPause: UIButton!
     @IBOutlet weak var imgGif: UIImageView!
     
     var onRecord: ((Bool) -> ())?

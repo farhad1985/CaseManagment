@@ -14,6 +14,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
+        CaseManagementService.getToken()
+        CaseManagementService.getSubTypes(1) { (result) in
+            switch result {
+            case .success(let value):
+                print(value)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 
     @IBAction func aa(_ sender: Any) {
